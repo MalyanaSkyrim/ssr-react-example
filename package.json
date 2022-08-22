@@ -1,0 +1,43 @@
+{
+  "name": "list-git-repos",
+  "version": "0.1.0",
+  "private": true,
+  "dependencies": {
+    "axios": "^0.19.0",
+    "esbuild": "0.14.13",
+    "express": "4.17.2",
+    "react": "^16.8.6",
+    "react-dom": "^16.8.6",
+    "react-infinite-scroller": "^1.2.4",
+    "react-redux": "^7.2.0",
+    "react-router-dom": "^5.3.0",
+    "redux": "^4.0.5",
+    "redux-devtools-extension": "^2.13.8",
+    "redux-saga": "^1.1.3"
+  },
+  "scripts": {
+    "build:client": "node ./build.client.js",
+    "build:server": "node ./build.server.js",
+    "build": "npm run build:client && npm run build:server",
+    "start": "node ./build/server.js"
+  },
+  "eslintConfig": {
+    "extends": "react-app"
+  },
+  "homepage": "https://malyanaskyrim.github.io/list-git-repos-challenge",
+  "browserslist": {
+    "production": [
+      ">0.2%",
+      "not dead",
+      "not op_mini all"
+    ],
+    "development": [
+      "last 1 chrome version",
+      "last 1 firefox version",
+      "last 1 safari version"
+    ]
+  },
+  "devDependencies": {
+    "esbuild-plugin-svgr": "^1.0.1"
+  }
+}

@@ -1,3 +1,3 @@
-# react-ssr-example 🐔
+# ssr-react-example
 
-A simple React server-side rendering example using express and esbuild
+ Server-side rendering with React and React Router v5 example using express and esbuild

@@ -1,20 +1,14 @@
 import React from "react";
-import { Provider } from "react-redux";
-import { Route, StaticRouter, Switch } from "react-router-dom";
-import store from "./redux/store";
-import ListReposContainer from "./components/ListReposContainer";
-import RepoOwnerContainer from "./components/RepoOwnerContainer";
+import { Route, Switch } from "react-router-dom";
+import { routes } from "./routes";
 
 function App() {
   return (
-    <Provider store={store}>
-      <StaticRouter>
-      <Switch>
-        <Route exact path='/' component={ListReposContainer} />
-        <Route exact path='/user/:username' component={RepoOwnerContainer} />
-      </Switch>
-      </StaticRouter>
-    </Provider>
+    <Switch>
+      {routes.map(({ path, exact, component }) => (
+        <Route key={path} path={path} exact={exact} component={component} />
+      ))}
+    </Switch>
   );
 }
 

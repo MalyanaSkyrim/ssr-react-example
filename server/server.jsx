@@ -6,11 +6,18 @@ import ReactDOMServer from "react-dom/server";
 import express from "express";
 
 import App from "../src/App";
+import { StaticRouter } from "react-router-dom";
+import { Provider } from "react-redux";
+import store from "../src/redux/store";
 
 const PORT = process.env.PORT || 3001;
 const app = express();
 
-app.get("/", (req, res) => {
+app.use(express.json());
+app.use(express.static(path.resolve("./dist"), { maxAge: "1d" }));
+app.use(express.static(path.resolve("./public/assets"), { maxAge: "1d" }));
+
+app.get("*", (req, res) => {
   fs.readFile(path.resolve("./public/index.html"), "utf8", (err, data) => {
     if (err) {
       console.error(err);
@@ -20,18 +27,18 @@ app.get("/", (req, res) => {
     return res.send(
       data.replace(
         '<div id="root"></div>',
-        `<div id="root">${ReactDOMServer.renderToString(<App />)}</div>`
+        `<div id="root">${ReactDOMServer.renderToString(
+          <Provider store={store}>
+            <StaticRouter location={req.url} context={{}}>
+              <App />
+            </StaticRouter>
+          </Provider>
+        )}
+          </div>`
       )
     );
   });
 });
-
-app.use(
-  express.static(path.resolve("./dist"), { maxAge: "30d" })
-);
-app.use(
-  express.static(path.resolve("./public"), { maxAge: "30d" })
-);
 
 app.listen(PORT, () => {
   console.log(`Server is listening on port ${PORT}`);
